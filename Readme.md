@@ -30,3 +30,7 @@ installed: /usr/local/share/xray/geosite.dat
 ```
 # bash -c "$(curl -L https://github.com/KoinuDayo/Xray-geodat-update/raw/main/uninstall.sh)"
 ```
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=KoinuDayo/Xray-geodat-update&type=Timeline)](https://star-history.com/#KoinuDayo/Xray-geodat-update&Timeline)
