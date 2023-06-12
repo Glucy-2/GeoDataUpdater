@@ -1,4 +1,4 @@
-# Xray-install
+# Xray-geodat-update
 
 Bash script for installing Xray in operating systems such as Arch / CentOS / Debian / OpenSUSE that support systemd.
 
