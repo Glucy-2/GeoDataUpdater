@@ -8,4 +8,6 @@ mv /tmp/updategeodat.sh /usr/local/bin/updategeodat.sh
 mv /tmp/xray-dat-update.service /etc/systemd/system/xray-dat-update.service
 mv /tmp/xray-dat-update.timer /etc/systemd/system/xray-dat-update.timer
 
+chmod 755 /usr/local/bin/updategeodat.sh
+
 echo -e "Install complete, but you may need enable and start service and timer by your self.\nsystemctl enable xray-dat-update.service\nsystemctl enable xray-dat-update.timer\nsystemctl start xray-dat-update.service\nsystemctl start xray-dat-update.timer"
