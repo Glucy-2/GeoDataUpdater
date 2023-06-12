@@ -4,4 +4,4 @@ After = network.target
 
 [Service]
 Type = oneshot
-ExecStart = /usr/bin/updategeodat.sh
+ExecStart = /usr/local/bin/updategeodat.sh
