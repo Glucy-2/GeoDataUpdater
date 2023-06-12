@@ -1,6 +1,6 @@
 # Xray-geodat-update
 
-Bash script for installing Xray in operating systems such as Arch / CentOS / Debian / OpenSUSE that support systemd.
+Bash script for installing Xray-geodat-update in operating systems such as Arch / CentOS / Debian / OpenSUSE that support systemd.
 
 [Filesystem Hierarchy Standard (FHS)](https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard) 
 
