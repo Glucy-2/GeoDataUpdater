@@ -8,7 +8,7 @@ Bash script for installing Xray in operating systems such as Arch / CentOS / Deb
 installed: /etc/systemd/system/xray-dat-update.service
 installed: /etc/systemd/system/xray-dat-update.timer
 
-installed: /usr/local/bin/updategeodate.sh
+installed: /usr/local/bin/updategeodat.sh
 
 installed: /usr/local/share/xray/geoip.dat
 installed: /usr/local/share/xray/geosite.dat
