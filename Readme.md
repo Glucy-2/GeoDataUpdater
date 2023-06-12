@@ -17,7 +17,7 @@ installed: /usr/local/share/xray/geoip.dat
 installed: /usr/local/share/xray/geosite.dat
 ```
 
-## Basic Usage
+## Usage
 
 **Install Xray-geodat-update**
 
