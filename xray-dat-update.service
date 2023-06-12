@@ -5,3 +5,6 @@ After = network.target
 [Service]
 Type = oneshot
 ExecStart = /usr/local/bin/updategeodat.sh
+
+[Install]
+WantedBy=multi-user.target
