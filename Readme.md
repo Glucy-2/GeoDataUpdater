@@ -19,13 +19,13 @@ installed: /usr/local/share/xray/geosite.dat
 
 ## Basic Usage
 
-**Install & Upgrade Xray-core and geodata with `User=nobody`, but will NOT overwrite `User` in existing service files**
+**Install Xray-geodat-update**
 
 ```
 # bash -c "$(curl -L https://github.com/KoinuDayo/Xray-geodat-update/raw/main/install.sh)"
 ```
 
-**Remove Xray, except json and logs**
+**Remove Xray-geodat-update**
 
 ```
 # bash -c "$(curl -L https://github.com/KoinuDayo/Xray-geodat-update/raw/main/uninstall.sh)"
