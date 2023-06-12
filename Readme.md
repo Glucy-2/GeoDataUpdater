@@ -3,6 +3,8 @@
 Bash script for installing Xray in operating systems such as Arch / CentOS / Debian / OpenSUSE that support systemd.
 
 [Filesystem Hierarchy Standard (FHS)](https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard)
+Upstream URL:
+[v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat)
 
 ```
 installed: /etc/systemd/system/xray-dat-update.service
