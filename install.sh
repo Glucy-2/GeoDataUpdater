@@ -8,6 +8,8 @@ Description=Service for update xray-dat-rules files
 [Service]
 Type=oneshot
 ExecStart=/usr/local/bin/updategeodat.sh
+StandardOutput=syslog
+StandardError=syslog
 EOF
 
 cat <<EOF > /etc/systemd/system/xray-dat-update.timer
