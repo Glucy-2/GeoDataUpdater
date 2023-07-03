@@ -2,7 +2,7 @@
 Description=Run xray-dat-update daily
 
 [Timer]
-OnCalendar=*-*-* 6:05:00
+OnCalendar=*-*-* 6:10:00
 Persistent=true
 
 [Install]
