@@ -1,16 +1,30 @@
 #!/usr/bin/bash
 
 # Download files
-curl -o /tmp/xray-dat-update.service "https://github.com/KoinuDayo/Xray-geodat-update/raw/main/xray-dat-update.service"
-curl -o /tmp/xray-dat-update.timer "https://github.com/KoinuDayo/Xray-geodat-update/raw/main/xray-dat-update.timer"
-curl -o /tmp/updategeodat.sh "https://github.com/KoinuDayo/Xray-geodat-update/raw/main/updategeodat.sh"
+cat <<EOF > /etc/systemd/system/xray-dat-update.service
+[Unit]
+Description=Service for update xray-dat-rules files
 
-# Move files to appropriate locations
-mv /tmp/updategeodat.sh /usr/local/bin/updategeodat.sh
-mv /tmp/xray-dat-update.service /etc/systemd/system/xray-dat-update.service
-mv /tmp/xray-dat-update.timer /etc/systemd/system/xray-dat-update.timer
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/updategeodat.sh
+EOF
 
-# Set execute permission for updategeodat.sh
+cat <<EOF > /etc/systemd/system/xray-dat-update.timer
+[Unit]
+Description=Timer for updating xray-dat-rules files
+
+[Timer]
+OnCalendar=*-*-* 06:10:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+EOF
+
+curl -L -o /usr/local/bin/updategeodat.sh "https://github.com/KoinuDayo/Xray-geodat-update/raw/main/updategeodat.sh"
+
+# Set permission
 chmod +x /usr/local/bin/updategeodat.sh
 
 # Enable xray-dat-update.timer
@@ -33,3 +47,4 @@ if systemctl start xray-dat-update.timer; then
 else
   echo "xray-dat-update.timer start failed, please check logs"
 fi
+

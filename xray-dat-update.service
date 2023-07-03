@@ -1,6 +1,0 @@
-[Unit]
-Description = Service for update xray-dat-rules files
-
-[Service]
-Type = simple
-ExecStart = nohup /usr/local/bin/updategeodat.sh &
