@@ -22,13 +22,13 @@ installed: /usr/local/share/xray/geosite.dat
 **Install Xray-geodat-update**
 
 ```
-# bash -c "$(curl -L https://github.com/KoinuDayo/Xray-geodat-update/raw/main/install.sh)"
+ bash -c "$(curl -L https://github.com/KoinuDayo/Xray-geodat-update/raw/main/install.sh)"
 ```
 
 **Remove Xray-geodat-update**
 
 ```
-# bash -c "$(curl -L https://github.com/KoinuDayo/Xray-geodat-update/raw/main/uninstall.sh)"
+ bash -c "$(curl -L https://github.com/KoinuDayo/Xray-geodat-update/raw/main/uninstall.sh)"
 ```
 
 ## Star History

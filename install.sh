@@ -1,13 +1,35 @@
 #!/usr/bin/bash
 
-wget -P /tmp "https://github.com/KoinuDayo/Xray-geodat-update/raw/main/xray-dat-update.service"
-wget -P /tmp "https://github.com/KoinuDayo/Xray-geodat-update/raw/main/xray-dat-update.timer"
-wget -P /tmp "https://github.com/KoinuDayo/Xray-geodat-update/raw/main/updategeodat.sh"
+# Download files
+curl -o /tmp/xray-dat-update.service "https://github.com/KoinuDayo/Xray-geodat-update/raw/main/xray-dat-update.service"
+curl -o /tmp/xray-dat-update.timer "https://github.com/KoinuDayo/Xray-geodat-update/raw/main/xray-dat-update.timer"
+curl -o /tmp/updategeodat.sh "https://github.com/KoinuDayo/Xray-geodat-update/raw/main/updategeodat.sh"
 
+# Move files to appropriate locations
 mv /tmp/updategeodat.sh /usr/local/bin/updategeodat.sh
 mv /tmp/xray-dat-update.service /etc/systemd/system/xray-dat-update.service
 mv /tmp/xray-dat-update.timer /etc/systemd/system/xray-dat-update.timer
 
-chmod 755 /usr/local/bin/updategeodat.sh
+# Set execute permission for updategeodat.sh
+chmod +x /usr/local/bin/updategeodat.sh
 
-echo -e "Install complete, but you may need enable and start service and timer by your self.\nsystemctl enable xray-dat-update.service\nsystemctl enable xray-dat-update.timer\nsystemctl start xray-dat-update.service\nsystemctl start xray-dat-update.timer"
+# Enable xray-dat-update.timer
+if systemctl enable xray-dat-update.timer; then
+  echo "xray-dat-update.timer enable succeeded"
+else
+  echo "xray-dat-update.timer enable failed"
+fi
+
+# Start xray-dat-update.service
+if systemctl start xray-dat-update.service; then
+  echo "xray-dat-update.service start succeeded"
+else
+  echo "xray-dat-update.service start failed, please check logs"
+fi
+
+# Start xray-dat-update.timer
+if systemctl start xray-dat-update.timer; then
+  echo "xray-dat-update.timer start succeeded"
+else
+  echo "xray-dat-update.timer start failed, please check logs"
+fi
