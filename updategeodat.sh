@@ -40,3 +40,12 @@ else
   mv "/tmp/$file2_name" "$download_dir"
   mv "/tmp/$hash2_file_name" "$download_dir"
 fi
+
+# Check if xray.service is running, and start/restart if necessary
+if systemctl is-active --quiet xray.service; then
+  echo "xray.service is running, restarting it"
+  systemctl restart xray.service
+else
+  echo "xray.service is not running, starting it"
+  systemctl start xray.service
+fi
