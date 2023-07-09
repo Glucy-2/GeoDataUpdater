@@ -33,7 +33,7 @@ install() {
       curl -L -o /usr/local/bin/updategeodata.sh --proxy "$proxy_value" "https://github.com/KoinuDayo/Xray-geodat-update/raw/main/forV2ray.sh"
     fi
   fi
-  chmod +x /usr/local/bin/updategeodat.sh
+  chmod +x /usr/local/bin/updategeodata.sh
   # Create geodataupdater.service
   cat <<EOF > /etc/systemd/system/geodataupdater.service
 [Unit]
