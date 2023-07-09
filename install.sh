@@ -78,12 +78,12 @@ EOF
     echo "geodataupdater.timer start failed"
   fi
 
-  if systemctl start geodataupdater.service; then
-    echo "geodataupdater.service start succeeded"
+  if bash /usr/local/bin/updategeodata.sh; then
+    echo "Successfully updated geodata"
   else
-    echo "geodataupdater.service start failed, please check logs"
+    echo "Failed to update geodata"
   fi
-
+  
   echo "Installation complete."
   read -p "Do you want to disable xray.service and enable the geodataupdater.service? [Y/n]: " choice
   case "$choice" in
@@ -109,20 +109,38 @@ EOF
 # Function for uninstallation
 uninstall() {
   # Stop and disable the service and timer
-  if systemctl stop geodataupdater.service; then
-    echo "Stopping geodataupdater.service"
+if systemctl stop geodataupdater.service; then
+    echo "Stopping geodataupdater.service: Success"
+  else
+    echo "Stopping geodataupdater.service: Failed"
+  fi
+
+  if systemctl disable geodataupdater.service; then
+    echo "Disabling geodataupdater.service: Success"
+  else
+    echo "Disabling geodataupdater.service: Failed"
   fi
 
   if systemctl stop geodataupdater.timer; then
-    echo "Stopping geodataupdater.timer"
+    echo "Stopping geodataupdater.timer: Success"
+  else
+    echo "Stopping geodataupdater.timer: Failed"
   fi
 
   if systemctl disable geodataupdater.timer; then
-    echo "Disabling geodataupdater.timer"
+    echo "Disabling geodataupdater.timer: Success"
+  else
+    echo "Disabling geodataupdater.timer: Failed"
+  fi
+
+  if systemctl enable xray.service; then
+    echo "Enabling xray.service: Success"
+  else
+    echo "Enabling xray.service: Failed"
   fi
 
   # Move files to temporary directory
-  mv /usr/local/bin/updategeodat.sh /tmp/updategeodate.sh
+  mv /usr/local/bin/updategeodata.sh /tmp/updategeodata.sh
   mv /etc/systemd/system/geodataupdater.service /tmp/geodataupdater.service
   mv /etc/systemd/system/geodataupdater.timer /tmp/geodataupdater.timer
 
