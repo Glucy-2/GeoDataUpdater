@@ -44,7 +44,7 @@ Type=oneshot
 ExecStart=/usr/local/bin/updategeodata.sh
 StandardOutput=syslog
 StandardError=syslog
-Environment="http_proxy=$proxy_value"
+Environment=http_proxy=$proxy_value
 
 [Install]
 WantedBy=multi-user.target
