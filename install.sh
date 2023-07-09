@@ -41,7 +41,7 @@ Description=Service for updating geodata files
 
 [Service]
 Type=oneshot
-ExecStart=/usr/local/bin/updategeodat.sh
+ExecStart=/usr/local/bin/updategeodata.sh
 StandardOutput=syslog
 StandardError=syslog
 Environment="http_proxy=$proxy_value"
