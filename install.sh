@@ -47,12 +47,10 @@ StandardError=syslog
 EOF
 
   if [[ "$proxy_value" != "default" ]]; then
-    echo "Environment=http_proxy=$proxy_value" >> /etc/systemd/system/geodataupdater.service
-    echo "Environment=https_proxy=$proxy_value" >> /etc/systemd/system/geodataupdater.service
+    echo -e "Environment=http_proxy=$proxy_value\nEnvironment=https_proxy=$proxy_value" >> /etc/systemd/system/geodataupdater.service
   fi
 
-  echo "[Install]" >> /etc/systemd/system/geodataupdater.service
-  echo "WantedBy=multi-user.target" >> /etc/systemd/system/geodataupdater.service
+  echo -e "\n[Install]\nWantedBy=multi-user.target" >> /etc/systemd/system/geodataupdater.service
 
   # Create geodataupdater.timer
   cat <<EOF > /etc/systemd/system/geodataupdater.timer
@@ -87,6 +85,25 @@ EOF
   fi
 
   echo "Installation complete."
+  read -p "Do you want to disable xray.service and enable the geodataupdater.service? [Y/n]: " choice
+  case "$choice" in
+    y|Y|"")
+      if systemctl disable xray.service; then
+        echo "xray.service disabled."
+      else
+        echo "Failed to disable xray.service."
+      fi
+
+      if systemctl enable geodataupdater.service; then
+        echo "geodataupdater.service enabled."
+      else
+        echo "Failed to enable geodataupdater.service."
+      fi
+      ;;
+    *)
+      echo "You can manually disable xray.service and enable geodataupdater.service."
+      ;;
+  esac
 }
 
 # Function for uninstallation
