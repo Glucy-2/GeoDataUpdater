@@ -44,12 +44,15 @@ Type=oneshot
 ExecStart=/usr/local/bin/updategeodata.sh
 StandardOutput=syslog
 StandardError=syslog
-Environment="http_proxy=$proxy_value"
-Environment="https_proxy=$proxy_value"
-
-[Install]
-WantedBy=multi-user.target
 EOF
+
+  if [[ "$proxy_value" != "default" ]]; then
+    echo "Environment=http_proxy=$proxy_value" >> /etc/systemd/system/geodataupdater.service
+    echo "Environment=https_proxy=$proxy_value" >> /etc/systemd/system/geodataupdater.service
+  fi
+
+  echo "[Install]" >> /etc/systemd/system/geodataupdater.service
+  echo "WantedBy=multi-user.target" >> /etc/systemd/system/geodataupdater.service
 
   # Create geodataupdater.timer
   cat <<EOF > /etc/systemd/system/geodataupdater.timer
