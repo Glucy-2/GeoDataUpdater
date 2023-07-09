@@ -1,4 +1,4 @@
-# Xray-geodat-update
+# GeoDataUpdater
 
 Bash script for installing Xray-geodat-update in operating systems such as Arch / CentOS / Debian / OpenSUSE that support systemd.
 
@@ -8,27 +8,39 @@ Upstream URL:
 [v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat) 
 
 ```
-installed: /etc/systemd/system/xray-dat-update.service
-installed: /etc/systemd/system/xray-dat-update.timer
+installed: /etc/systemd/system/geodataupdater.service
+installed: /etc/systemd/system/geodataupdater.timer
 
-installed: /usr/local/bin/updategeodat.sh
+installed: /usr/local/bin/updategeodata.sh
 
-installed: /usr/local/share/xray/geoip.dat
-installed: /usr/local/share/xray/geosite.dat
+installed: /usr/local/share/$type/geoip.dat
+installed: /usr/local/share/$type/geosite.dat
 ```
 
 ## Usage
 
-**Install Xray-geodat-update**
+**Install GeoDataUpdater for Xray**
 
 ```
- bash -c "$(curl -L https://github.com/KoinuDayo/Xray-geodat-update/raw/main/install.sh)"
+ bash -c "$(curl -L https://github.com/KoinuDayo/GeoDataUpdater/raw/main/install.sh)"
 ```
 
-**Remove Xray-geodat-update**
+**Install GeoDataUpdater Using Proxy**
 
 ```
- bash -c "$(curl -L https://github.com/KoinuDayo/Xray-geodat-update/raw/main/uninstall.sh)"
+ bash -c "$(curl -L https://github.com/KoinuDayo/GeoDataUpdater/raw/main/install.sh)" --proxy=$http_proxy
+```
+
+**Install GeoDataUpdater for V2ray**
+
+```
+ bash -c "$(curl -L https://github.com/KoinuDayo/GeoDataUpdater/raw/main/install.sh)" --type=v2ray
+```
+
+**Remove GeoDataUpdater**
+
+```
+ bash -c "$(curl -L https://github.com/KoinuDayo/GeoDataUpdater/raw/main/install.sh)" --remove
 ```
 
 ## Star History
