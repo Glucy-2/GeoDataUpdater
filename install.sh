@@ -9,7 +9,7 @@ install() {
   if [[ "$type" ]]; then
     type_value="$type"
   else
-    type_value="default"
+    type_value="xray"
   fi
 
   # Check if --proxy is specified
@@ -20,7 +20,7 @@ install() {
   fi
 
   # Download files
-  if [[ "$type_value" == "default" ]]; then
+  if [[ "$type_value" == "xray" ]]; then
     if [[ "$proxy_value" == "default" ]]; then
       curl -L -o /usr/local/bin/updategeodata.sh "https://github.com/KoinuDayo/Xray-geodat-update/raw/main/updategeodata.sh"
     else
@@ -85,13 +85,13 @@ EOF
   fi
   
   echo "Installation complete."
-  read -p "Do you want to disable xray.service and enable the geodataupdater.service? [Y/n]: " choice
+  read -p "Do you want to disable $type_value.service and enable the geodataupdater.service? [Y/n]: " choice
   case "$choice" in
     y|Y|"")
-      if systemctl disable xray.service; then
-        echo "xray.service disabled."
+      if systemctl disable $type_value.service; then
+        echo "$type_value.service disabled."
       else
-        echo "Failed to disable xray.service."
+        echo "Failed to disable $type_value.service."
       fi
 
       if systemctl enable geodataupdater.service; then
@@ -108,6 +108,13 @@ EOF
 
 # Function for uninstallation
 uninstall() {
+  # Check if --type is specified
+  if [[ "$type" ]]; then
+    type_value="$type"
+  else
+    type_value="xray"
+  fi
+
   # Stop and disable the service and timer
 if systemctl stop geodataupdater.service; then
     echo "Stopping geodataupdater.service: Success"
@@ -133,10 +140,11 @@ if systemctl stop geodataupdater.service; then
     echo "Disabling geodataupdater.timer: Failed"
   fi
 
-  if systemctl enable xray.service; then
-    echo "Enabling xray.service: Success"
+# Enable $type.service
+  if systemctl enable $type_value.service; then
+    echo "Enabling $type_value.service: Success"
   else
-    echo "Enabling xray.service: Failed"
+    echo "Enabling $type_value.service: Failed"
   fi
 
   # Move files to temporary directory
