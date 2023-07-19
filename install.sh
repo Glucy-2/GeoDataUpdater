@@ -1,4 +1,9 @@
- #!/usr/bin/bash
+#!/usr/bin/bash
+
+if [[ $EUID -ne 0 ]]; then
+    echo "You have to use root to run this script"
+    exit 1
+fi
 
 # Function for installation
 install() {
