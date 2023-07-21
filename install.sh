@@ -27,11 +27,11 @@ install() {
   cat <<EOF > /usr/local/bin/updategeodata.sh
 #!/bin/bash
 
-file1_name="geoip.dat"  # Replace with the first file name to download
-file2_name="geosite.dat"  # Replace with the second file name to download
-hash1_file_name="geoip.dat.sha256sum"  # Replace with the hash file name for the first file
-hash2_file_name="geosite.dat.sha256sum"  # Replace with the hash file name for the second file
-download_dir="/usr/local/share/$type_value/"  # Replace with the destination folder path
+file1_name="geoip.dat"  
+file2_name="geosite.dat"  
+hash1_file_name="geoip.dat.sha256sum"  
+hash2_file_name="geosite.dat.sha256sum"  
+download_dir="/usr/local/share/$type_value/"  
 
 # Download file 1 and its corresponding hash file to the temporary folder
 curl -L -o "/tmp/\$file1_name" "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/\$file1_name"
@@ -55,7 +55,7 @@ if [ "\$actual_hash1" != "\$expected_hash1" ]; then
 else
   echo "Hash verification passed for geoip.dat, moving the file to the destination folder"
   mv "/tmp/\$file1_name" "\$download_dir"
-  mv "/tmp/\$hash1_file_name" "\$download_dir"
+  rm "/tmp/\$hash1_file_name"
 fi
 
 if [ "\$actual_hash2" != "\$expected_hash2" ]; then
@@ -65,7 +65,7 @@ if [ "\$actual_hash2" != "\$expected_hash2" ]; then
 else
   echo "Hash verification passed for geosite.dat, moving the file to the destination folder"
   mv "/tmp/\$file2_name" "\$download_dir"
-  mv "/tmp/\$hash2_file_name" "\$download_dir"
+  rm "/tmp/\$hash2_file_name"
 fi
 
 # Check if xray.service is running, and start/restart if necessary
@@ -191,9 +191,9 @@ uninstall() {
   mv /etc/systemd/system/geodataupdater.timer /tmp/geodataupdater.timer
 
   echo -e "\
-  Uninstallation complete.
-  You can find deleted files in /tmp.
-  This script won't delete your geoip.dat and geosite.dat."
+Uninstallation complete.
+You can find deleted files in /tmp.
+This script won't delete your geoip.dat and geosite.dat."
   exit 0
 }
 
