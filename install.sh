@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 if [[ $EUID -ne 0 ]]; then
-    echo "You have to use root to run this script"
+    echo "You have to use root or sudo to run this script"
     exit 1
 fi
 # Initialize variables
@@ -21,6 +21,11 @@ install() {
     # Create updategeodata.sh
     cat <<EOF >/usr/local/bin/updategeodata.sh
 #!/bin/bash
+
+if [[ \$EUID -ne 0 ]]; then
+    echo "You have to use root or sudo to run this script"
+    exit 1
+fi
 
 owner="1001:colord"
 
@@ -117,6 +122,7 @@ EOF
 [Unit]
 Description=Service for updating geodata files
 After=network.target
+Wants=network.target
 
 [Service]
 Type=oneshot
