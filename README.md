@@ -37,7 +37,3 @@ updategeodata.sh [--proxy=$http_proxy]
 ```shell
  bash -c "$(curl -L https://github.com/Glucy-2/GeoDataUpdater/raw/main/install.sh)" -- remove
 ```
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=Glucy-2/Xray-geodat-update&type=Timeline)](https://star-history.com/#Glucy-2/Xray-geodat-update&Timeline)
