@@ -23,50 +23,92 @@ install() {
 #!/bin/bash
 
 owner="1001:colord"
-file1_name="geoip.dat"  
-file2_name="geosite.dat"  
-hash1_file_name="geoip.dat.sha256sum"  
-hash2_file_name="geosite.dat.sha256sum"  
-download_dir="/opt/nekoray/"  
 
-# Download file 1 and its corresponding hash file to the temporary folder
-echo "Downloading geoip.dat and its corresponding hash file to the temporary folder"
-curl -L -o "/tmp/\$file1_name" "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/\$file1_name"
-curl -L -o "/tmp/\$hash1_file_name" "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/\$hash1_file_name"
+geoip_dat_name="geoip.dat"
+geosite_dat_name="geosite.dat"
+geoip_dat_hash="geoip.dat.sha256sum"
+geosite_dat_hash="geosite.dat.sha256sum"
 
-# Download file 2 and its corresponding hash file to the temporary folder
-echo "Downloading geosite.dat and its corresponding hash file to the temporary folder"
-curl -L -o "/tmp/\$file2_name" "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/\$file2_name"
-curl -L -o "/tmp/\$hash2_file_name" "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/\$hash2_file_name"
+geoip_db_name="geoip.db"
+geosite_db_name="geosite.db"
+geoip_db_hash="geoip.db.sha256sum"
+geosite_db_hash="geosite.db.sha256sum"
 
-# Verify the hash values
-echo "Verifying the hash values"
-actual_hash1=\$(sha256sum "/tmp/\$file1_name" | awk '{print \$1}')
-expected_hash1=\$(cat "/tmp/\$hash1_file_name" | awk '{print \$1}')
+download_dir="/opt/nekoray/"
 
-actual_hash2=\$(sha256sum "/tmp/\$file2_name" | awk '{print \$1}')
-expected_hash2=\$(cat "/tmp/\$hash2_file_name" | awk '{print \$1}')
+echo "Downloading geoip.dat"
+curl -L -o "/tmp/\$geoip_dat_name" "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/\$geoip_dat_name"
+curl -L -o "/tmp/\$geoip_dat_hash" "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/\$geoip_dat_hash"
 
-if [ "\$actual_hash1" != "\$expected_hash1" ]; then
+echo "Verifying geoip.dat"
+actual_hash=\$(sha256sum "/tmp/\$geoip_dat_name" | awk '{print \$1}')
+expected_hash=\$(cat "/tmp/\$geoip_dat_hash" | awk '{print \$1}')
+
+if [ "\$actual_hash" != "\$expected_hash" ]; then
   echo "Hash verification failed for geoip.dat, deleting the file"
-  rm "/tmp/\$file1_name"
-  rm "/tmp/\$hash1_file_name"
+  rm "/tmp/\$geoip_dat_name"
+  rm "/tmp/\$geoip_dat_hash"
 else
   echo "Hash verification passed for geoip.dat, moving the file to the destination folder"
-  chown "\$owner" "/tmp/\$file1_name"
-  mv "/tmp/\$file1_name" "\$download_dir"
-  rm "/tmp/\$hash1_file_name"
+  chown "\$owner" "/tmp/\$geoip_dat_name"
+  mv "/tmp/\$geoip_dat_name" "\$download_dir"
+  rm "/tmp/\$geoip_dat_hash"
 fi
 
-if [ "\$actual_hash2" != "\$expected_hash2" ]; then
+echo "Downloading geosite.dat"
+curl -L -o "/tmp/\$geosite_dat_name" "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/\$geosite_dat_name"
+curl -L -o "/tmp/\$geosite_dat_hash" "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/\$geosite_dat_hash"
+
+actual_hash2=\$(sha256sum "/tmp/\$geosite_dat_name" | awk '{print \$1}')
+expected_hash2=\$(cat "/tmp/\$geosite_dat_hash" | awk '{print \$1}')
+
+if [ "\$actual_hash" != "\$expected_hash" ]; then
   echo "Hash verification failed for geosite.dat, deleting the file"
-  rm "/tmp/\$file2_name"
-  rm "/tmp/\$hash2_file_name"
+  rm "/tmp/\$geosite_dat_name"
+  rm "/tmp/\$geosite_dat_hash"
 else
   echo "Hash verification passed for geosite.dat, moving the file to the destination folder"
-  chown "\$owner" "/tmp/\$file2_name"
-  mv "/tmp/\$file2_name" "\$download_dir"
-  rm "/tmp/\$hash2_file_name"
+  chown "\$owner" "/tmp/\$geosite_dat_name"
+  mv "/tmp/\$geosite_dat_name" "\$download_dir"
+  rm "/tmp/\$geosite_dat_hash"
+fi
+
+
+echo "Downloading geoip.db"
+curl -L -o "/tmp/\$geoip_db_name" "https://github.com/SagerNet/sing-geoip/releases/latest/download/\$geoip_db_name"
+curl -L -o "/tmp/\$geoip_db_hash" "https://github.com/SagerNet/sing-geoip/releases/latest/download/\$geoip_db_hash"
+
+echo "Verifying geoip.db"
+actual_hash=\$(sha256sum "/tmp/\$geoip_db_name" | awk '{print \$1}')
+expected_hash=\$(cat "/tmp/\$geoip_db_hash" | awk '{print \$1}')
+
+if [ "\$actual_hash" != "\$expected_hash" ]; then
+  echo "Hash verification failed for geoip.db, deleting the file"
+  rm "/tmp/\$geoip_db_name"
+  rm "/tmp/\$geoip_db_hash"
+else
+  echo "Hash verification passed for geoip.db, moving the file to the destination folder"
+  chown "\$owner" "/tmp/\$geoip_db_name"
+  mv "/tmp/\$geoip_db_name" "\$download_dir"
+  rm "/tmp/\$geoip_db_hash"
+fi
+
+echo "Downloading geosite.db"
+curl -L -o "/tmp/\$geosite_db_name" "https://github.com/SagerNet/sing-geosite/releases/latest/download/\$geosite_db_name"
+curl -L -o "/tmp/\$geosite_db_hash" "https://github.com/SagerNet/sing-geosite/releases/latest/download/\$geosite_db_hash"
+
+actual_hash2=\$(sha256sum "/tmp/\$geosite_db_name" | awk '{print \$1}')
+expected_hash2=\$(cat "/tmp/\$geosite_db_hash" | awk '{print \$1}')
+
+if [ "\$actual_hash" != "\$expected_hash" ]; then
+  echo "Hash verification failed for geosite.db, deleting the file"
+  rm "/tmp/\$geosite_db_name"
+  rm "/tmp/\$geosite_db_hash"
+else
+  echo "Hash verification passed for geosite.db, moving the file to the destination folder"
+  chown "\$owner" "/tmp/\$geosite_db_name"
+  mv "/tmp/\$geosite_db_name" "\$download_dir"
+  rm "/tmp/\$geosite_db_hash"
 fi
 EOF
     chmod +x /usr/local/bin/updategeodata.sh
@@ -174,7 +216,7 @@ uninstall() {
     echo -e "\
 Uninstallation complete.
 You can find deleted files in /tmp.
-This script won't delete your geoip.dat and geosite.dat."
+This script won't delete your database files."
     exit 0
 }
 
