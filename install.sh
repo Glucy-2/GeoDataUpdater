@@ -11,9 +11,6 @@ proxy=
 install() {
     local proxy_value
 
-    # Check if --type is specified
-    checktype
-
     # Check if --proxy is specified
     if [[ "$proxy" ]]; then
         proxy_value="$proxy"
@@ -141,9 +138,6 @@ EOF
 
 # Function for uninstallation
 uninstall() {
-    # Check if --type is specified
-    checktype
-
     # Stop and disable the service and timer
     if systemctl stop geodataupdater.service; then
         echo "Stopping geodataupdater.service: Success"
