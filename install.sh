@@ -30,14 +30,17 @@ hash2_file_name="geosite.dat.sha256sum"
 download_dir="/opt/nekoray/"  
 
 # Download file 1 and its corresponding hash file to the temporary folder
+echo "Downloading geoip.dat and its corresponding hash file to the temporary folder"
 curl -L -o "/tmp/\$file1_name" "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/\$file1_name"
 curl -L -o "/tmp/\$hash1_file_name" "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/\$hash1_file_name"
 
 # Download file 2 and its corresponding hash file to the temporary folder
+echo "Downloading geosite.dat and its corresponding hash file to the temporary folder"
 curl -L -o "/tmp/\$file2_name" "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/\$file2_name"
 curl -L -o "/tmp/\$hash2_file_name" "https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/\$hash2_file_name"
 
 # Verify the hash values
+echo "Verifying the hash values"
 actual_hash1=\$(sha256sum "/tmp/\$file1_name" | awk '{print \$1}')
 expected_hash1=\$(cat "/tmp/\$hash1_file_name" | awk '{print \$1}')
 
