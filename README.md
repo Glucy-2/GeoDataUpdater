@@ -13,36 +13,30 @@ installed: /etc/systemd/system/geodataupdater.timer
 
 installed: /usr/local/bin/updategeodata.sh
 
-installed: /usr/local/share/$type/geoip.dat
-installed: /usr/local/share/$type/geosite.dat
+installed: /opt/nekoray/geoip.dat
+installed: /opt/nekoray/geosite.dat
 ```
 
 ## Usage
 
-**Install GeoDataUpdater for Xray**
+**Install GeoDataUpdater for nekoray**
 
 ```
- bash -c "$(curl -L https://github.com/KoinuDayo/GeoDataUpdater/raw/main/install.sh)" -- install
+ bash -c "$(curl -L https://github.com/Glucy-2/GeoDataUpdater/raw/main/install.sh)" -- install
 ```
 
 **Install GeoDataUpdater Using Proxy**
 
 ```
- bash -c "$(curl -L https://github.com/KoinuDayo/GeoDataUpdater/raw/main/install.sh)" -- install --proxy=$http_proxy
-```
-
-**Install GeoDataUpdater for V2ray**
-
-```
- bash -c "$(curl -L https://github.com/KoinuDayo/GeoDataUpdater/raw/main/install.sh)" -- install --type=v2ray
+ bash -c "$(curl -L https://github.com/Glucy-2/GeoDataUpdater/raw/main/install.sh)" -- install --proxy=$http_proxy
 ```
 
 **Remove GeoDataUpdater**
 
 ```
- bash -c "$(curl -L https://github.com/KoinuDayo/GeoDataUpdater/raw/main/install.sh)" -- remove
+ bash -c "$(curl -L https://github.com/Glucy-2/GeoDataUpdater/raw/main/install.sh)" -- remove
 ```
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=KoinuDayo/Xray-geodat-update&type=Timeline)](https://star-history.com/#KoinuDayo/Xray-geodat-update&Timeline)
+[![Star History Chart](https://api.star-history.com/svg?repos=Glucy-2/Xray-geodat-update&type=Timeline)](https://star-history.com/#Glucy-2/Xray-geodat-update&Timeline)
